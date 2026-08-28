@@ -83,6 +83,11 @@ export const footerContent: FooterContent = {
         label: "About",
         href: "/about",
       },
+      {
+        id: "rights",
+        label: "Rights & Ownership",
+        href: "/rights",
+      },
     ],
   },
 
@@ -90,12 +95,12 @@ export const footerContent: FooterContent = {
     {
       id: "instagram",
       label: "Instagram",
-      href: "#",
+      href: "https://www.instagram.com/sarvangah.shakti/",
     },
     {
-      id: "youtube",
-      label: "YouTube",
-      href: "#",
+      id: "email",
+      label: "sarvangah.shakti@gmail.com",
+      href: "mailto:sarvangah.shakti@gmail.com",
     },
   ],
 

@@ -696,26 +696,26 @@ export default function PracticesPage() {
   return (
     <main className="min-h-screen bg-[#f7f1e5] text-[#30261f]">
       {/* HERO */}
-      <section className="mx-auto max-w-[1100px] px-6 pb-20 pt-28 text-center md:pb-24 md:pt-36">
+      <section className="mx-auto max-w-[1100px] px-4 pb-12 pt-24 text-center sm:px-6 sm:pb-16 sm:pt-28 md:pb-24 md:pt-36">
         <p className="text-[10px] uppercase tracking-[0.4em] text-[#a77827]">
           SĀDHANĀ • ŚĀSTRA • SELF-REALIZATION
         </p>
 
-        <h1 className="mt-6 font-serif text-[clamp(48px,7vw,88px)] font-normal leading-[0.95] tracking-[-0.045em]">
+        <h1 className="mt-4 font-serif text-[clamp(36px,7vw,88px)] font-normal leading-[1] tracking-[-0.03em] sm:mt-6 sm:leading-[0.95] sm:tracking-[-0.045em]">
           Spiritual Practices
         </h1>
 
-        <div className="my-7 flex items-center justify-center gap-4">
-          <span className="h-px w-14 bg-[#b78a3c]/40" />
-          <span className="text-[18px] text-[#b78a3c]">✦</span>
-          <span className="h-px w-14 bg-[#b78a3c]/40" />
+        <div className="my-5 flex items-center justify-center gap-3 sm:my-7 sm:gap-4">
+          <span className="h-px w-10 bg-[#b78a3c]/40 sm:w-14" />
+          <span className="text-[16px] text-[#b78a3c] sm:text-[18px]">✦</span>
+          <span className="h-px w-10 bg-[#b78a3c]/40 sm:w-14" />
         </div>
 
-        <h2 className="font-serif text-[25px] leading-tight md:text-[35px]">
-          One hundred doors into sādhanā
+        <h2 className="font-serif text-[22px] leading-tight sm:text-[25px] md:text-[35px]">
+          Thirty doors into sādhanā
         </h2>
 
-        <p className="mx-auto mt-6 max-w-[760px] text-[15px] leading-[1.85] text-[#66584c]">
+        <p className="mx-auto mt-4 max-w-[760px] text-[14px] leading-relaxed text-[#66584c] sm:mt-6 sm:text-[15px] sm:leading-[1.85]">
           Explore Yoga, Bhakti, Jñāna, Dharma and Vedic traditions through
           Sanskrit terminology, textual context, practical examples and
           contemplative reflection.
@@ -724,23 +724,23 @@ export default function PracticesPage() {
 
       {/* NOTE */}
       <section className="border-y border-[#3e3025]/10 bg-[#efe6d4]">
-        <div className="mx-auto max-w-[1000px] px-6 py-12 md:px-10 md:py-16">
+        <div className="mx-auto max-w-[1000px] px-4 py-8 sm:px-6 sm:py-12 md:px-10 md:py-16">
           <p className="text-[9px] uppercase tracking-[0.32em] text-[#a77827]">
             A note on sources
           </p>
 
-          <h2 className="mt-4 font-serif text-[30px] leading-tight md:text-[38px]">
+          <h2 className="mt-3 font-serif text-[24px] leading-tight sm:mt-4 sm:text-[30px] md:text-[38px]">
             Many traditions. One library.
           </h2>
 
-          <p className="mt-5 text-[15px] leading-[1.9] text-[#66584c]">
+          <p className="mt-4 text-[14px] leading-relaxed text-[#66584c] sm:mt-5 sm:text-[15px] sm:leading-[1.9]">
             Sarvāṅga does not call every practice “Vedic.” Vedic Saṃhitās,
             Brāhmaṇas, Āraṇyakas, Upaniṣads, Yoga texts, Bhagavad Gītā,
             Purāṇas and later devotional traditions have different textual
             histories and philosophical contexts.
           </p>
 
-          <p className="mt-4 text-[15px] leading-[1.9] text-[#66584c]">
+          <p className="mt-3 text-[14px] leading-relaxed text-[#66584c] sm:mt-4 sm:text-[15px] sm:leading-[1.9]">
             Where a practice is a modern synthesis, it is identified as such
             rather than being falsely attributed to an ancient scripture.
           </p>
@@ -748,29 +748,29 @@ export default function PracticesPage() {
       </section>
 
       {/* LIBRARY */}
-      <section className="mx-auto max-w-[1150px] px-6 py-20 md:px-10 md:py-24">
-        <div className="mb-12">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <section className="mx-auto max-w-[1150px] px-4 py-12 sm:px-6 sm:py-16 md:px-10 md:py-24">
+        <div className="mb-8 sm:mb-12">
+          <div className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-[9px] uppercase tracking-[0.32em] text-[#a77827]">
-                100 Practices
+                30 Practices
               </p>
 
-          <h2 className="mt-4 font-serif text-[39px] leading-tight md:text-[50px]">
-            Enter Sādhanā
-          </h2>
+              <h2 className="mt-3 font-serif text-[32px] leading-tight sm:mt-4 sm:text-[39px] md:text-[50px]">
+                Enter Sādhanā
+              </h2>
 
-              <p className="mt-4 max-w-[700px] text-[14px] leading-[1.8] text-[#756557]">
+              <p className="mt-3 max-w-[700px] text-[13px] leading-relaxed text-[#756557] sm:mt-4 sm:text-[14px] sm:leading-[1.8]">
                 Open any practice to explore its meaning, traditional context,
                 Sanskrit, examples and reflection.
               </p>
             </div>
 
-            <div className="shrink-0 border border-[#3e3025]/10 px-5 py-3 text-center">
+            <div className="w-fit shrink-0 border border-[#3e3025]/10 px-4 py-2 text-center sm:px-5 sm:py-3">
               <p className="text-[8px] uppercase tracking-[0.28em] text-[#9b8977]">
                 Complete Library
               </p>
-              <p className="mt-1 font-serif text-[25px] text-[#a77827]">
+              <p className="mt-0.5 font-serif text-[22px] text-[#a77827] sm:text-[25px]">
                 {practices.length}
               </p>
               <p className="text-[8px] uppercase tracking-[0.2em] text-[#9b8977]">
@@ -794,52 +794,50 @@ export default function PracticesPage() {
                   onClick={() =>
                     setOpenPractice(isOpen ? null : practice.id)
                   }
-                  className="flex w-full items-center gap-5 py-7 text-left md:gap-8"
+                  className="flex w-full items-center gap-3 py-4 text-left sm:gap-5 sm:py-6 md:gap-8"
                 >
-                  <span className="w-8 shrink-0 text-[10px] tracking-[0.2em] text-[#a77827]">
+                  <span className="w-6 shrink-0 text-[10px] tracking-[0.15em] text-[#a77827] sm:w-8 sm:tracking-[0.2em]">
                     {String(practice.id).padStart(2, "0")}
                   </span>
 
                   <div className="min-w-0 flex-1">
-                    <p className="mb-2 text-[8px] uppercase tracking-[0.28em] text-[#9b8977]">
+                    <p className="mb-1 text-[8px] uppercase tracking-[0.25em] text-[#9b8977] sm:mb-2 sm:tracking-[0.28em]">
                       {practice.category}
                     </p>
 
-                    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                      <h3 className="font-serif text-[27px] font-normal md:text-[35px]">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 sm:gap-x-4">
+                      <h3 className="font-serif text-[22px] font-normal sm:text-[27px] md:text-[35px]">
                         {practice.sanskrit}
                       </h3>
 
-                      <span className="text-[14px] text-[#6b5b4d] md:text-[16px]">
+                      <span className="text-[13px] text-[#6b5b4d] sm:text-[14px] md:text-[16px]">
                         — {practice.title}
                       </span>
                     </div>
 
                     {!isOpen && (
-                      <p className="mt-2 max-w-[720px] text-[13px] leading-[1.7] text-[#8a7968]">
+                      <p className="mt-1.5 max-w-[720px] text-[12px] leading-relaxed text-[#8a7968] sm:mt-2 sm:text-[13px] sm:leading-[1.7]">
                         {practice.description}
                       </p>
                     )}
                   </div>
 
                   <ChevronDown
-                    size={19}
+                    size={18}
                     strokeWidth={1.4}
-                    className={`shrink-0 text-[#9b7128] transition-transform duration-500 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
+                    className={`shrink-0 text-[#9b7128] transition-transform duration-500 ${isOpen ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
 
                 <div
-                  className={`grid transition-all duration-500 ${
-                    isOpen
+                  className={`grid transition-all duration-500 ${isOpen
                       ? "grid-rows-[1fr] opacity-100"
                       : "grid-rows-[0fr] opacity-0"
-                  }`}
+                    }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="pb-12 pl-12 md:pl-16">
+                    <div className="pb-8 pl-1 sm:pb-10 sm:pl-8 md:pl-16">
                       {/* INTRO */}
                       <p className="max-w-[900px] text-[16px] leading-[1.9] text-[#4f4339]">
                         {practice.description}

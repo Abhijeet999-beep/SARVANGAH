@@ -66,7 +66,7 @@ export default function LoginPage() {
       {/* ─────────────────────────────────────────────────────────────
           3. MAIN CONTENT: NATURAL DOCUMENT FLOW & BALANCED GRID
       ────────────────────────────────────────────────────────────── */}
-      <main className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-start px-4 pt-8 pb-14 sm:px-8 sm:pt-12 sm:pb-16 lg:px-16 lg:pt-14 lg:pb-16">
+      <main className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-center px-4 pt-8 pb-14 sm:px-8 sm:pt-12 sm:pb-16 lg:px-16 lg:pt-14 lg:pb-16">
 
         <div className="grid w-full items-start gap-8 lg:grid-cols-12 lg:gap-12 lg:items-center xl:gap-16">
 
@@ -110,8 +110,8 @@ export default function LoginPage() {
           {/* ─────────────────────────────────────────────────────────────
               RIGHT (Desktop) / PRIMARY (Mobile & Tablet): Authentication Gateway Card
           ────────────────────────────────────────────────────────────── */}
-          <div className="flex w-full justify-center lg:col-span-6 lg:justify-end xl:col-span-5">
-            <div className="w-full max-w-[440px]">
+          <div className="flex w-full justify-center lg:col-span-6 lg:justify-center xl:col-span-5 xl:justify-center">
+            <div className="mx-auto w-full max-w-[440px]">
 
               {/* Mobile & Tablet Dedicated Spiritual Header (< 1024px) */}
               <div className="mb-6 flex flex-col items-center text-center lg:hidden">
@@ -134,7 +134,7 @@ export default function LoginPage() {
               </div>
 
               {/* Authentication Shell Card */}
-              <div className="w-full rounded-2xl border border-[#2b2118]/10 bg-[#fbf8f2] p-5 shadow-[0_8px_32px_rgba(43,33,24,0.04)] sm:p-8">
+              <div className="mx-auto w-full rounded-2xl border border-[#2b2118]/10 bg-[#fbf8f2] p-5 shadow-[0_8px_32px_rgba(43,33,24,0.04)] sm:p-8">
 
                 {/* Canonical Authentication Header */}
                 <div className="mb-6 text-center">
@@ -160,33 +160,34 @@ export default function LoginPage() {
                       fontFamily: "inherit",
                     },
                     elements: {
-                      rootBox: "w-full max-w-full flex justify-center bg-transparent shadow-none mx-auto",
-                      cardBox: "w-full max-w-full shadow-none p-0 border-0 bg-transparent flex justify-center mx-auto",
-                      card: "w-full max-w-full shadow-none p-0 border-0 bg-transparent flex flex-col items-center mx-auto",
-                      main: "w-full max-w-full bg-transparent flex flex-col items-center mx-auto",
-                      form: "w-full max-w-full flex flex-col mx-auto",
-                      formField: "w-full max-w-full mx-auto",
+                      rootBox: "!w-full !max-w-full flex justify-center items-center bg-transparent shadow-none !mx-auto",
+                      cardBox: "!w-full !max-w-full shadow-none p-0 border-0 bg-transparent flex justify-center items-center !mx-auto",
+                      card: "!w-full !max-w-full shadow-none p-0 border-0 bg-transparent flex flex-col items-center justify-center !mx-auto",
+                      main: "!w-full !max-w-full bg-transparent flex flex-col items-center justify-center !mx-auto",
+                      form: "!w-full !max-w-full flex flex-col !mx-auto",
+                      formField: "!w-full !max-w-full !mx-auto",
+                      formFieldRow: "!w-full !max-w-full !mx-auto",
                       // Suppress Clerk's generic default headers completely
                       header: "hidden",
                       headerTitle: "hidden",
                       headerSubtitle: "hidden",
                       headerBackRow: "hidden",
-                      socialButtons: "w-full max-w-full mx-auto",
+                      socialButtons: "!w-full !max-w-full !mx-auto",
                       socialButtonsBlockButton:
-                        "w-full max-w-full rounded-full border border-[#2b2118]/15 bg-[#fcfaf6] text-[#493c32] hover:border-[#9b7128] hover:bg-[#f4efe4] transition-colors py-2.5 min-h-[46px] flex items-center justify-center text-xs sm:text-sm font-medium shadow-none mx-auto",
+                        "!w-full !max-w-full rounded-full border border-[#2b2118]/15 bg-[#fcfaf6] text-[#493c32] hover:border-[#9b7128] hover:bg-[#f4efe4] transition-colors py-2.5 min-h-[46px] flex items-center justify-center text-xs sm:text-sm font-medium shadow-none !mx-auto",
                       socialButtonsBlockButtonText: "text-xs sm:text-sm font-medium text-[#493c32] text-center",
-                      dividerRow: "w-full max-w-full my-4 flex items-center justify-center mx-auto",
+                      dividerRow: "!w-full !max-w-full my-4 flex items-center justify-center !mx-auto",
                       dividerLine: "bg-[#2b2118]/10",
                       dividerText: "text-xs tracking-wider text-[#9b8977] bg-[#fbf8f2] px-3 font-normal",
                       formFieldLabel:
                         "text-[11px] sm:text-xs font-medium uppercase tracking-wider text-[#6f5c48] mb-1.5",
                       formFieldInput:
-                        "w-full max-w-full rounded-lg border border-[#2b2118]/15 bg-[#fcfaf6] text-base sm:text-sm text-[#2b2118] focus:border-[#9b7128] focus:ring-1 focus:ring-[#9b7128]/20 transition-colors py-2.5 px-3.5 sm:py-3 sm:px-4 min-h-[46px]",
+                        "!w-full !max-w-full rounded-lg border border-[#2b2118]/15 bg-[#fcfaf6] text-base sm:text-sm text-[#2b2118] focus:border-[#9b7128] focus:ring-1 focus:ring-[#9b7128]/20 transition-colors py-2.5 px-3.5 sm:py-3 sm:px-4 min-h-[46px]",
                       formButtonPrimary:
-                        "w-full max-w-full rounded-full bg-[#9b7128] hover:bg-[#7f5c20] text-white text-xs sm:text-sm font-medium py-3 transition-colors duration-200 shadow-none min-h-[48px] cursor-pointer mt-2 mx-auto",
+                        "!w-full !max-w-full rounded-full bg-[#9b7128] hover:bg-[#7f5c20] text-white text-xs sm:text-sm font-medium py-3 transition-colors duration-200 shadow-none min-h-[48px] cursor-pointer mt-2 !mx-auto",
                       // Clean Ivory / Parchment Footer — NO black styling
-                      footer: "w-full max-w-full pt-4 border-t border-[#2b2118]/10 mt-4 bg-transparent text-[#6f5c48] mx-auto",
-                      footerAction: "w-full max-w-full bg-transparent text-[#6f5c48] flex justify-center items-center text-center mx-auto",
+                      footer: "!w-full !max-w-full pt-4 border-t border-[#2b2118]/10 mt-4 bg-transparent text-[#6f5c48] !mx-auto",
+                      footerAction: "!w-full !max-w-full bg-transparent text-[#6f5c48] flex justify-center items-center text-center !mx-auto",
                       footerActionText: "text-xs sm:text-sm text-[#6f5c48]",
                       footerActionLink:
                         "text-[#9b7128] hover:text-[#7f5c20] font-medium underline underline-offset-4 transition-colors ml-1",

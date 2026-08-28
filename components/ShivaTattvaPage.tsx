@@ -24,7 +24,7 @@ export default function ShivaTattvaPage() {
     <main className="overflow-hidden bg-[#f7f1e5] text-[#30251c]">
 
       {/* HERO */}
-      <section className="px-6 pb-16 pt-20 md:pb-20 md:pt-24 lg:px-12">
+      <section className="px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-28 md:pb-20 md:pt-36 lg:px-12">
         <div className="mx-auto max-w-5xl text-center">
           <p className="mb-4 text-[11px] font-medium uppercase tracking-[0.35em] text-[#9b7128]">
             {hero.eyebrow}

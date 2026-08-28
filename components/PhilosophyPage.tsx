@@ -17,21 +17,21 @@ export default function PhilosophyPage() {
   return (
     <main className="overflow-hidden bg-[#f7f1e5] text-[#30251c]">
       {/* Hero */}
-      <section className="px-6 pb-14 pt-28 md:pb-16 md:pt-36 lg:px-12">
+      <section className="px-4 pb-10 pt-24 sm:px-6 sm:pb-14 sm:pt-28 md:pb-16 md:pt-36 lg:px-12">
         <div className="mx-auto max-w-5xl text-center">
           <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.34em] text-[#9b7128] md:text-[11px]">
             {hero.eyebrow}
           </p>
 
-          <h1 className="mx-auto max-w-4xl text-[38px] font-semibold leading-[1.08] tracking-[-0.025em] md:text-[46px] lg:text-[52px]">
+          <h1 className="mx-auto max-w-4xl text-[32px] font-semibold leading-[1.1] tracking-[-0.025em] sm:text-[38px] md:text-[46px] lg:text-[52px]">
             {hero.title}
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-[14px] leading-6 text-[#6b5d4d] md:mt-6 md:text-[15px] md:leading-7">
+          <p className="mx-auto mt-4 max-w-2xl text-[14px] leading-6 text-[#6b5d4d] sm:mt-5 md:mt-6 md:text-[15px] md:leading-7">
             {hero.description}
           </p>
 
-          <div className="mx-auto mt-6 flex items-center justify-center gap-3">
+          <div className="mx-auto mt-5 flex items-center justify-center gap-3 sm:mt-6">
             <span className="h-px w-9 bg-[#c5a467]" />
 
             <span className="text-sm text-[#9b7128]">
@@ -44,7 +44,7 @@ export default function PhilosophyPage() {
       </section>
 
       {/* Introduction */}
-      <section className="border-t border-[#e1d6c2] px-6 py-14 md:py-16 lg:px-12">
+      <section className="border-t border-[#e1d6c2] px-4 py-10 sm:px-6 sm:py-14 md:py-16 lg:px-12">
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.7fr_1.3fr] md:gap-14">
           <div>
             <p className="text-[10px] uppercase tracking-[0.3em] text-[#9b7128] md:text-[11px]">

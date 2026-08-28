@@ -22,6 +22,10 @@ export const navigationContent = {
       href: "/community",
     },
     {
+      label: "Consultation",
+      href: "/consultation",
+    },
+    {
       label: "About",
       href: "/about",
     },

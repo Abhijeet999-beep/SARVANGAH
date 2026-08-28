@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
@@ -15,25 +15,28 @@ import { navigationContent } from "@/content/navigation";
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
 
-  // Close mobile menu on route change
+  // Close mobile menu whenever the route changes
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // Close on Escape key press
+  // Close mobile menu with Escape
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
         setIsOpen(false);
       }
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
 
-  // Do not render the global navbar on standalone authentication routes
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  // Hide global navbar on authentication pages
   if (
     pathname?.startsWith("/login") ||
     pathname?.startsWith("/sign-in") ||
@@ -47,79 +50,219 @@ export default function Navbar() {
 
   return (
     <>
+      {/* =====================================================
+          GLOBAL NAVBAR
+      ===================================================== */}
+
       <header
+        className="
+          fixed
+          inset-x-0
+          top-0
+          z-[100]
+          h-[68px]
+          w-full
+          border-b
+          border-[#2b2118]/10
+          bg-[#f4efe4]/95
+          backdrop-blur-md
+        "
         style={{
-          height: "76px",
-          minHeight: "76px",
-          maxHeight: "76px",
-          paddingTop: 0,
-          paddingBottom: 0,
-          paddingLeft: 0,
-          paddingRight: 0,
           margin: 0,
-          boxSizing: "border-box",
+          padding: 0,
         }}
-        className="fixed top-0 left-0 right-0 z-50 w-full border-b border-[#2b2118]/10 bg-[#f4efe4]/90 p-0 backdrop-blur-md"
       >
         <nav
-          style={{
-            height: "76px",
-            minHeight: "76px",
-            maxHeight: "76px",
-            margin: 0,
-          }}
-          className="mx-auto flex h-[76px] w-full max-w-[1400px] items-center justify-between px-4 sm:px-8 lg:px-12"
           aria-label="Main Navigation"
+          className="
+            mx-auto
+            flex
+            h-[68px]
+            w-full
+            max-w-[1500px]
+            items-center
+            justify-between
+            px-5
+            sm:px-8
+            lg:px-12
+            xl:px-16
+          "
+          style={{
+            marginTop: 0,
+            marginBottom: 0,
+          }}
         >
-          {/* Brand Logo */}
+          {/* =================================================
+              BRAND
+          ================================================= */}
+
           <Link
             href="/"
-            className="flex shrink-0 items-center gap-3 transition-opacity hover:opacity-90"
             aria-label={`${brand.name} home`}
+            className="
+              flex
+              h-full
+              shrink-0
+              items-center
+              gap-3
+              leading-none
+              transition-opacity
+              duration-200
+              hover:opacity-90
+            "
           >
             <span
-              style={{
-                width: "46px",
-                height: "46px",
-              }}
-              className="flex items-center justify-center rounded-full border border-[#b58a3a] bg-[#fbf8f2] font-serif text-xl text-[#9b7128] shadow-sm sm:h-12 sm:w-12 sm:text-2xl"
+              className="
+                flex
+                h-[46px]
+                w-[46px]
+                shrink-0
+                items-center
+                justify-center
+                rounded-full
+                border
+                border-[#b58a3a]
+                bg-[#fbf8f2]
+                font-serif
+                text-[22px]
+                leading-none
+                text-[#9b7128]
+                shadow-sm
+                sm:h-[48px]
+                sm:w-[48px]
+                sm:text-[24px]
+              "
             >
               {brand.symbol}
             </span>
 
-            <span className="font-serif text-xl font-semibold leading-none tracking-wider text-[#30251c] sm:text-2xl">
+            <span
+              className="
+                whitespace-nowrap
+                font-serif
+                text-[21px]
+                font-semibold
+                leading-none
+                tracking-wide
+                text-[#30251c]
+                sm:text-[23px]
+              "
+            >
               {brand.name}
             </span>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden items-center gap-8 lg:flex">
-            {items.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`inline-flex items-center whitespace-nowrap text-[15px] leading-none tracking-wide transition-colors duration-200 ${
-                    isActive
-                      ? "font-medium text-[#9b7128] underline underline-offset-8 decoration-[#9b7128]/60"
-                      : "text-[#66594b] hover:text-[#9b7128]"
-                  }`}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+          {/* =================================================
+              DESKTOP NAVIGATION
+          ================================================= */}
+
+          <div
+            className="
+              hidden
+              h-full
+              items-center
+              lg:flex
+            "
+          >
+            <div
+              className="
+                flex
+                items-center
+                gap-8
+                xl:gap-9
+              "
+            >
+              {items.map((item) => {
+                const isActive =
+                  pathname === item.href ||
+                  (item.href !== "/" &&
+                    pathname?.startsWith(`${item.href}/`));
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={`
+                      relative
+                      inline-flex
+                      h-[68px]
+                      items-center
+                      whitespace-nowrap
+                      text-[14px]
+                      leading-none
+                      tracking-[0.04em]
+                      transition-colors
+                      duration-200
+                      ${isActive
+                        ? "text-[#9b7128]"
+                        : "text-[#66594b] hover:text-[#9b7128]"
+                      }
+                    `}
+                  >
+                    {item.label}
+
+                    {isActive && (
+                      <span
+                        className="
+                          absolute
+                          bottom-[18px]
+                          left-1/2
+                          h-[1px]
+                          w-5
+                          -translate-x-1/2
+                          bg-[#9b7128]/70
+                        "
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Authentication & Mobile Toggle */}
-          <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+          {/* =================================================
+              RIGHT SIDE
+          ================================================= */}
+
+          <div
+            className="
+              flex
+              h-full
+              shrink-0
+              items-center
+              gap-2
+              sm:gap-3
+            "
+          >
+            {/* Signed Out */}
+
             <Show when="signed-out">
               <SignInButton mode="redirect">
                 <button
                   type="button"
-                  className="rounded-full border border-[#9b7128] px-3.5 py-1.5 text-xs font-medium text-[#6d4f20] transition-colors hover:bg-[#9b7128] hover:text-white sm:px-5 sm:py-2 sm:text-sm cursor-pointer"
+                  className="
+                    inline-flex
+                    h-[36px]
+                    items-center
+                    justify-center
+                    rounded-full
+                    border
+                    border-[#9b7128]
+                    px-4
+                    text-[12px]
+                    font-medium
+                    leading-none
+                    text-[#6d4f20]
+                    transition-all
+                    duration-200
+                    hover:bg-[#9b7128]
+                    hover:text-white
+                    cursor-pointer
+                    sm:h-[38px]
+                    sm:px-5
+                    sm:text-[13px]
+                  "
                 >
                   Log In
                 </button>
@@ -128,74 +271,210 @@ export default function Navbar() {
               <SignUpButton mode="redirect">
                 <button
                   type="button"
-                  className="hidden rounded-full bg-[#9b7128] px-4 py-1.5 text-xs font-medium text-white transition-colors hover:bg-[#7f5c20] sm:inline-flex sm:px-5 sm:py-2 sm:text-sm cursor-pointer shadow-sm"
+                  className="
+                    hidden
+                    h-[38px]
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-[#9b7128]
+                    px-5
+                    text-[13px]
+                    font-medium
+                    leading-none
+                    text-white
+                    shadow-sm
+                    transition-all
+                    duration-200
+                    hover:bg-[#7f5c20]
+                    cursor-pointer
+                    sm:inline-flex
+                  "
                 >
                   Create Account
                 </button>
               </SignUpButton>
             </Show>
 
+            {/* Signed In */}
+
             <Show when="signed-in">
-              <UserButton />
+              <div
+                className="
+                  flex
+                  h-[40px]
+                  w-[40px]
+                  items-center
+                  justify-center
+                "
+              >
+                <UserButton
+                  appearance={{
+                    elements: {
+                      avatarBox: "h-9 w-9",
+                    },
+                  }}
+                />
+              </div>
             </Show>
 
-            {/* Mobile Hamburger Button */}
+            {/* Mobile Menu */}
+
             <button
               type="button"
-              aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-label={
+                isOpen
+                  ? "Close navigation menu"
+                  : "Open navigation menu"
+              }
               aria-expanded={isOpen}
               aria-controls="mobile-navigation-menu"
-              onClick={() => setIsOpen((prev) => !prev)}
-              className="flex h-10 w-10 items-center justify-center rounded-lg text-[#30251c] transition-colors hover:bg-[#2b2118]/5 lg:hidden cursor-pointer"
+              onClick={() => setIsOpen((previous) => !previous)}
+              className="
+                flex
+                h-[40px]
+                w-[40px]
+                items-center
+                justify-center
+                rounded-lg
+                text-[#30251c]
+                transition-colors
+                duration-200
+                hover:bg-[#2b2118]/5
+                cursor-pointer
+                lg:hidden
+              "
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? (
+                <X size={22} strokeWidth={1.7} />
+              ) : (
+                <Menu size={22} strokeWidth={1.7} />
+              )}
             </button>
           </div>
         </nav>
       </header>
 
-      {/* Mobile Navigation Dropdown & Backdrop */}
-      {isOpen && (
-        <div
-          ref={menuRef}
-          id="mobile-navigation-menu"
-          className="fixed inset-x-0 top-[76px] z-50 flex flex-col border-b border-[#b58a3a]/20 bg-[#f4efe4]/98 px-6 py-6 shadow-xl backdrop-blur-lg lg:hidden"
-        >
-          <nav className="flex flex-col gap-4" aria-label="Mobile Navigation">
-            {items.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`py-1 text-lg tracking-wide transition-colors ${
-                    isActive
-                      ? "font-semibold text-[#9b7128]"
-                      : "text-[#66594b] hover:text-[#9b7128]"
-                  }`}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+      {/* =====================================================
+          MOBILE NAVIGATION
+      ===================================================== */}
 
-            <Show when="signed-out">
-              <div className="mt-3 border-t border-[#b58a3a]/20 pt-4 sm:hidden">
-                <SignUpButton mode="redirect">
-                  <button
-                    type="button"
+      {isOpen && (
+        <>
+          {/* Backdrop */}
+
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            onClick={() => setIsOpen(false)}
+            className="
+              fixed
+              inset-0
+              z-[90]
+              bg-[#2b2118]/10
+              backdrop-blur-[2px]
+              lg:hidden
+            "
+          />
+
+          {/* Menu */}
+
+          <div
+            id="mobile-navigation-menu"
+            className="
+              fixed
+              inset-x-0
+              top-[68px]
+              z-[95]
+              border-b
+              border-[#b58a3a]/20
+              bg-[#f4efe4]/98
+              shadow-lg
+              backdrop-blur-xl
+              lg:hidden
+            "
+          >
+            <nav
+              aria-label="Mobile Navigation"
+              className="
+                mx-auto
+                flex
+                w-full
+                max-w-[1500px]
+                flex-col
+                px-6
+                py-5
+                sm:px-8
+              "
+            >
+              {items.map((item) => {
+                const isActive =
+                  pathname === item.href ||
+                  (item.href !== "/" &&
+                    pathname?.startsWith(`${item.href}/`));
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="w-full rounded-full bg-[#9b7128] py-2.5 text-center text-sm font-medium text-white transition-colors hover:bg-[#7f5c20] cursor-pointer shadow-sm"
+                    aria-current={isActive ? "page" : undefined}
+                    className={`
+                      flex
+                      min-h-[46px]
+                      items-center
+                      border-b
+                      border-[#b58a3a]/10
+                      text-[15px]
+                      tracking-wide
+                      transition-colors
+                      duration-200
+                      ${isActive
+                        ? "font-semibold text-[#9b7128]"
+                        : "text-[#66594b] hover:text-[#9b7128]"
+                      }
+                    `}
                   >
-                    Create Account
-                  </button>
-                </SignUpButton>
-              </div>
-            </Show>
-          </nav>
-        </div>
+                    {item.label}
+                  </Link>
+                );
+              })}
+
+              {/* Mobile Create Account */}
+
+              <Show when="signed-out">
+                <div className="pt-5">
+                  <SignUpButton mode="redirect">
+                    <button
+                      type="button"
+                      onClick={() => setIsOpen(false)}
+                      className="
+                        flex
+                        w-full
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-[#9b7128]
+                        py-3
+                        text-[13px]
+                        font-medium
+                        leading-none
+                        text-white
+                        shadow-sm
+                        transition-colors
+                        duration-200
+                        hover:bg-[#7f5c20]
+                        cursor-pointer
+                      "
+                    >
+                      Create Account
+                    </button>
+                  </SignUpButton>
+                </div>
+              </Show>
+            </nav>
+          </div>
+        </>
       )}
     </>
   );

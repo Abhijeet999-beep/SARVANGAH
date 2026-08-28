@@ -18,22 +18,22 @@ export default function WisdomPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#f7f1e5] text-[#30251c]">
       {/* ───────────────── HERO ───────────────── */}
-      <section className="px-6 pb-12 pt-28 md:px-10 md:pb-14 md:pt-36 lg:px-16">
+      <section className="px-4 pb-10 pt-24 sm:px-6 sm:pb-12 sm:pt-28 md:px-10 md:pb-14 md:pt-36 lg:px-16">
         <div className="mx-auto max-w-5xl text-center">
 
           <p className="text-[10px] font-medium uppercase tracking-[0.34em] text-[#9b7128] md:text-[11px]">
             {hero.eyebrow}
           </p>
 
-          <h1 className="mx-auto mt-4 max-w-4xl text-[38px] font-semibold leading-[1.08] tracking-[-0.025em] md:text-[46px] lg:text-[52px]">
+          <h1 className="mx-auto mt-4 max-w-4xl text-[32px] font-semibold leading-[1.1] tracking-[-0.025em] sm:text-[38px] md:text-[46px] lg:text-[52px]">
             {hero.title}
           </h1>
 
-          <p className="mx-auto mt-5 max-w-3xl text-[14px] leading-6 text-[#6b5d4d] md:text-[15px] md:leading-7">
+          <p className="mx-auto mt-4 max-w-3xl text-[14px] leading-6 text-[#6b5d4d] sm:mt-5 md:text-[15px] md:leading-7">
             {hero.description}
           </p>
 
-          <div className="mt-6 flex items-center justify-center gap-3">
+          <div className="mt-5 flex items-center justify-center gap-3 sm:mt-6">
             <span className="h-px w-9 bg-[#c6a56a]" />
             <span className="text-sm text-[#9b7128]">ॐ</span>
             <span className="h-px w-9 bg-[#c6a56a]" />
@@ -43,7 +43,7 @@ export default function WisdomPage() {
       </section>
 
       {/* ───────────────── INTRODUCTION ───────────────── */}
-      <section className="border-y border-[#ded2bd] px-6 py-12 md:px-10 md:py-14 lg:px-16">
+      <section className="border-y border-[#ded2bd] px-4 py-10 sm:px-6 sm:py-12 md:px-10 md:py-14 lg:px-16">
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.72fr_1.28fr] md:gap-14">
 
           <div>

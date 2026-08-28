@@ -40,6 +40,9 @@ body {
   margin: 0;
   padding: 0;
 
+  width: 100%;
+  max-width: 100%;
+
   min-height: 100%;
 
   background: var(--background);
@@ -50,6 +53,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 a {
@@ -64,159 +68,7 @@ select {
   font: inherit;
 }
 
-/* ========================================
-   NAVBAR
-======================================== */
 
-header {
-  position: fixed;
-
-  top: 0;
-  left: 0;
-  right: 0;
-
-  z-index: 100;
-
-  padding: 22px 40px;
-
-  background: rgba(244, 239, 228, 0.88);
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-
-  border-bottom: 1px solid var(--border);
-}
-
-header nav {
-  max-width: 1400px;
-
-  margin: 0 auto;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Brand */
-
-header nav > a {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  color: var(--brown);
-}
-
-header nav > a span:first-child {
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-
-  color: var(--gold);
-
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 20px;
-}
-
-header nav > a span:last-child {
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 19px;
-  letter-spacing: 3px;
-}
-
-/* Navigation links */
-
-header nav > div {
-  display: flex;
-  align-items: center;
-
-  gap: 34px;
-}
-
-header nav > div a {
-  position: relative;
-
-  color: var(--brown-soft);
-
-  font-size: 12px;
-  letter-spacing: 1.2px;
-
-  transition: color 0.3s ease;
-}
-
-header nav > div a::after {
-  content: "";
-
-  position: absolute;
-
-  left: 0;
-  bottom: -7px;
-
-  width: 0;
-  height: 1px;
-
-  background: var(--gold);
-
-  transition: width 0.3s ease;
-}
-
-header nav > div a:hover {
-  color: var(--gold);
-}
-
-header nav > div a:hover::after {
-  width: 100%;
-}
-
-/* Mobile menu */
-
-header nav button {
-  display: none;
-
-  width: 42px;
-  height: 42px;
-
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid var(--border);
-
-  background: transparent;
-
-  color: var(--brown);
-
-  cursor: pointer;
-}
-
-/* ========================================
-   RESPONSIVE NAVBAR
-======================================== */
-
-@media (max-width: 800px) {
-  header {
-    padding: 16px 20px;
-  }
-
-  header nav > div {
-    display: none;
-  }
-
-  header nav button {
-    display: flex;
-  }
-
-  header nav > a span:last-child {
-    font-size: 16px;
-    letter-spacing: 2px;
-  }
-}
 
 /* ========================================
    SHARED SECTION UTILITIES
@@ -630,8 +482,7 @@ header nav button {
 @media (max-width: 900px) {
   .hero {
     min-height: 100svh;
-
-    padding: 130px 28px 90px;
+    padding: 110px 24px 70px;
   }
 
   .hero-overlay {
@@ -665,13 +516,10 @@ header nav button {
   }
 
   .hero-mandala-one {
-    width: 420px;
-    height: 420px;
-
+    width: 380px;
+    height: 380px;
     right: 50%;
-
     top: 70%;
-
     transform: translate(50%, -50%);
   }
 
@@ -682,34 +530,45 @@ header nav button {
 
 @media (max-width: 600px) {
   .hero {
-    padding: 120px 20px 80px;
+    min-height: 100svh;
+    padding: 92px 18px 45px;
   }
 
   .om-symbol {
-    font-size: 34px;
+    font-size: 32px;
+    margin-bottom: 12px;
   }
 
   .hero h1 {
-    font-size: clamp(52px, 16vw, 76px);
+    font-size: clamp(40px, 13vw, 68px);
+    letter-spacing: -1px;
+  }
+
+  .hero-divider {
+    margin: 20px auto 16px;
   }
 
   .hero h2 {
-    font-size: 20px;
+    font-size: 18px;
+    margin-bottom: 16px;
   }
 
   .hero-description {
-    font-size: 14px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    margin-bottom: 24px;
   }
 
   .hero-actions {
     flex-direction: column;
-
     width: 100%;
+    gap: 12px;
   }
 
   .primary-button,
   .secondary-button {
     width: 100%;
+    min-height: 46px;
   }
 
   .hero-bottom {
@@ -898,7 +757,7 @@ header nav button {
 
 @media (max-width: 900px) {
   .pathways {
-    padding: 90px 28px;
+    padding: 70px 24px;
   }
 
   .pathways-grid {
@@ -916,11 +775,11 @@ header nav button {
 
 @media (max-width: 600px) {
   .pathways {
-    padding: 80px 20px;
+    padding: 56px 18px;
   }
 
   .pathways-heading {
-    margin-bottom: 50px;
+    margin-bottom: 36px;
   }
 
   .pathways-grid {
@@ -928,10 +787,9 @@ header nav button {
   }
 
   .pathway-card {
-    min-height: 220px;
-
+    min-height: 190px;
+    padding: 24px 20px;
     border-right: none;
-
     border-bottom: 1px solid var(--border);
   }
 
@@ -1036,7 +894,7 @@ header nav button {
 
 @media (max-width: 900px) {
   .philosophy {
-    padding: 100px 28px;
+    padding: 70px 24px;
   }
 
   .pillar-grid {
@@ -1054,7 +912,11 @@ header nav button {
 
 @media (max-width: 600px) {
   .philosophy {
-    padding: 80px 20px;
+    padding: 56px 18px;
+  }
+
+  .philosophy .section-heading {
+    margin-bottom: 36px;
   }
 
   .pillar-grid {
@@ -1062,9 +924,14 @@ header nav button {
   }
 
   .pillar-card {
-    min-height: 230px;
+    min-height: 190px;
+    padding: 24px 20px;
     border-right: none;
     border-bottom: 1px solid var(--border);
+  }
+
+  .pillar-icon {
+    margin-bottom: 20px;
   }
 
   .pillar-card:last-child {
@@ -1247,20 +1114,28 @@ header nav button {
   transform: translateY(-2px);
 }
 
+@media (max-width: 900px) {
+  .shiva-tattva {
+    padding: 80px 24px;
+  }
+}
+
 @media (max-width: 600px) {
   .shiva-tattva {
-    padding: 100px 20px;
+    padding: 60px 18px;
   }
 
   .shiva-tattva::before {
-    width: 380px;
-    height: 380px;
+    width: 320px;
+    height: 320px;
   }
 
   .shiva-tattva-quote {
-    padding: 30px 15px;
+    margin: 36px auto 28px;
+    padding: 24px 14px;
   }
 }
+
 /* ========================================
    DAILY SADHANA
 ======================================== */
@@ -1559,23 +1434,33 @@ header nav button {
    SADHANA RESPONSIVE
 ======================================== */
 
+@media (max-width: 900px) {
+  .sadhana {
+    padding: 75px 24px;
+  }
+}
+
 @media (max-width: 600px) {
   .sadhana {
-    padding: 90px 20px;
+    padding: 56px 18px;
+  }
+
+  .sadhana-heading {
+    margin-bottom: 36px;
   }
 
   .sadhana-card {
-    padding: 25px 20px;
+    padding: 22px 16px;
   }
 
   .sadhana-item {
-    gap: 14px;
+    gap: 12px;
 
-    padding: 20px 4px;
+    padding: 16px 4px;
   }
 
   .sadhana-item-content strong {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   .sadhana-item-content span {
@@ -1805,7 +1690,7 @@ header nav button {
 
 @media (max-width: 900px) {
   .wisdom {
-    padding: 100px 28px;
+    padding: 75px 24px;
   }
 
   .wisdom-grid {
@@ -1813,7 +1698,7 @@ header nav button {
   }
 
   .wisdom-card {
-    min-height: 280px;
+    min-height: 260px;
 
     border-right: none;
 
@@ -1827,19 +1712,24 @@ header nav button {
 
 @media (max-width: 600px) {
   .wisdom {
-    padding: 80px 20px;
+    padding: 56px 18px;
   }
 
   .wisdom-heading {
-    margin-bottom: 50px;
+    margin-bottom: 36px;
   }
 
   .wisdom-card {
-    min-height: 260px;
+    min-height: 210px;
 
-    padding: 25px;
+    padding: 20px 16px;
+  }
+
+  .wisdom-action {
+    margin-top: 32px;
   }
 }
+
 /* ========================================
    COMMUNITY
 ======================================== */
@@ -2018,7 +1908,7 @@ header nav button {
 
 @media (max-width: 900px) {
   .community {
-    padding: 100px 28px;
+    padding: 75px 24px;
   }
 
   .community-grid {
@@ -2026,7 +1916,7 @@ header nav button {
   }
 
   .community-card {
-    min-height: 250px;
+    min-height: 230px;
 
     border-right: none;
 
@@ -2040,17 +1930,17 @@ header nav button {
 
 @media (max-width: 600px) {
   .community {
-    padding: 80px 20px;
+    padding: 56px 18px;
   }
 
   .community-heading {
-    margin-bottom: 50px;
+    margin-bottom: 36px;
   }
 
   .community-card {
-    min-height: 230px;
+    min-height: 200px;
 
-    padding: 25px;
+    padding: 20px 16px;
   }
 }
 /* ========================================
@@ -2235,7 +2125,7 @@ header nav button {
 
 @media (max-width: 600px) {
   .site-footer {
-    padding: 65px 20px 25px;
+    padding: 56px 18px 25px;
   }
 
   .footer-main {

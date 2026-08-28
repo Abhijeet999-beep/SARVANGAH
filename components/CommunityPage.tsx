@@ -26,7 +26,7 @@ export default function CommunityPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-[#f7f1e5] text-[#30251c]">
       {/* ───────────────── HERO ───────────────── */}
-      <section className="px-6 pb-12 pt-28 md:px-10 md:pb-14 md:pt-36 lg:px-16">
+      <section className="px-4 pb-10 pt-24 sm:px-6 sm:pb-12 sm:pt-28 md:px-10 md:pb-14 md:pt-36 lg:px-16">
         <div className="mx-auto max-w-5xl text-center">
 
           <motion.p
@@ -39,7 +39,7 @@ export default function CommunityPage() {
           </motion.p>
 
           <motion.h1
-            className="mx-auto mt-4 max-w-4xl text-[38px] font-semibold leading-[1.08] tracking-[-0.025em] md:text-[46px] lg:text-[52px]"
+            className="mx-auto mt-4 max-w-4xl text-[32px] font-semibold leading-[1.1] tracking-[-0.025em] sm:text-[38px] md:text-[46px] lg:text-[52px]"
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
@@ -48,7 +48,7 @@ export default function CommunityPage() {
           </motion.h1>
 
           <motion.p
-            className="mx-auto mt-5 max-w-3xl text-[14px] leading-6 text-[#6b5d4d] md:text-[15px] md:leading-7"
+            className="mx-auto mt-4 max-w-3xl text-[14px] leading-6 text-[#6b5d4d] sm:mt-5 md:text-[15px] md:leading-7"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -56,7 +56,7 @@ export default function CommunityPage() {
             {hero.description}
           </motion.p>
 
-          <div className="mt-6 flex items-center justify-center gap-3">
+          <div className="mt-5 flex items-center justify-center gap-3 sm:mt-6">
             <span className="h-px w-9 bg-[#c6a56a]" />
             <span className="text-sm text-[#9b7128]">ॐ</span>
             <span className="h-px w-9 bg-[#c6a56a]" />
@@ -66,7 +66,7 @@ export default function CommunityPage() {
       </section>
 
       {/* ───────────────── INTRODUCTION ───────────────── */}
-      <section className="border-y border-[#ded2bd] px-6 py-12 md:px-10 md:py-14 lg:px-16">
+      <section className="border-y border-[#ded2bd] px-4 py-10 sm:px-6 sm:py-12 md:px-10 md:py-14 lg:px-16">
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[0.75fr_1.25fr] md:gap-14">
 
           <motion.div

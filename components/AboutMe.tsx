@@ -26,7 +26,7 @@ export default function AboutMe() {
       {/* =========================================================
           HERO — PRIMARY H1: PERSON 1 (SHLOKE THAKUR)
       ========================================================= */}
-      <section className="relative overflow-hidden px-6 pb-20 pt-28 sm:pt-32 md:px-10 md:pb-28 md:pt-36">
+      <section className="relative overflow-hidden px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-28 md:px-10 md:pb-28 md:pt-36">
         <div className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full border border-[#a77827]/10" />
         <div className="pointer-events-none absolute -right-20 -top-20 h-[440px] w-[440px] rounded-full border border-[#a77827]/10" />
 
