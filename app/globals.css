@@ -266,18 +266,28 @@ select {
   text-align: left;
 }
 
-/* Om */
+/* Logo Reveal Animation */
 
-.om-symbol {
-  margin-bottom: 18px;
+.hero-logo-reveal {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 12px;
+  height: 96px;
+  width: auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
-  color: var(--gold);
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: 42px;
-
-  line-height: 1;
+.logo-video {
+  height: 100%;
+  width: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  object-position: center;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at center, black 40%, transparent 95%);
+  mask-image: radial-gradient(ellipse 70% 70% at center, black 40%, transparent 95%);
+  pointer-events: none;
 }
 
 /* Eyebrow */
@@ -512,6 +522,13 @@ select {
     text-align: center;
   }
 
+  .hero-logo-reveal {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    height: 84px;
+  }
+
   .hero h1,
   .hero h2,
   .hero-description {
@@ -565,9 +582,9 @@ select {
       );
   }
 
-  .om-symbol {
-    font-size: 32px;
-    margin-bottom: 12px;
+  .hero-logo-reveal {
+    height: 74px;
+    margin-bottom: 8px;
   }
 
   .hero h1 {
@@ -614,6 +631,11 @@ select {
 
   .hero-background {
     background-position: 84% 6%;
+  }
+
+  .hero-logo-reveal {
+    height: 64px;
+    margin-bottom: 6px;
   }
 
   .hero h1 {

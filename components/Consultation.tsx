@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const consultationPaths = [
     {
@@ -85,7 +85,46 @@ export default function Consultation() {
     const [selectedPath, setSelectedPath] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
+    const [bookedSlots, setBookedSlots] = useState<string[]>([]);
+    const [isLoadingSlots, setIsLoadingSlots] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [submitted, setSubmitted] = useState(false);
+    const [bookingRef, setBookingRef] = useState<string>("");
+
+    /* =========================================================
+       FETCH BOOKED SLOTS WHEN DATE CHANGES
+    ========================================================= */
+
+    useEffect(() => {
+        if (!selectedDate) {
+            setBookedSlots([]);
+            return;
+        }
+
+        let isMounted = true;
+        setIsLoadingSlots(true);
+        setErrorMsg(null);
+
+        fetch(`/api/consultations/booked-slots?date=${encodeURIComponent(selectedDate)}`)
+            .then((res) => res.json())
+            .then((data) => {
+                if (isMounted) {
+                    if (data.success && Array.isArray(data.bookedSlots)) {
+                        setBookedSlots(data.bookedSlots);
+                    }
+                    setIsLoadingSlots(false);
+                }
+            })
+            .catch((err) => {
+                console.error("Failed to fetch booked slots:", err);
+                if (isMounted) setIsLoadingSlots(false);
+            });
+
+        return () => {
+            isMounted = false;
+        };
+    }, [selectedDate]);
 
     /* =========================================================
        PROFESSIONAL TIME SLOTS
@@ -97,10 +136,6 @@ export default function Consultation() {
        10:00 – 10:21
        11:00 – 11:21
        etc.
-  
-       This intentionally gives a 39-minute buffer between
-       sessions instead of displaying awkward times such as
-       09:51, 10:42, 11:33.
     ========================================================= */
 
     const generateTimeSlots = () => {
@@ -165,21 +200,53 @@ export default function Consultation() {
     };
 
     /* =========================================================
-       FORM SUBMIT
+       FORM SUBMIT TO BACKEND
     ========================================================= */
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        if (!selectedDate || !selectedTime) {
+        if (!selectedDate || !selectedTime || isSubmitting) {
             return;
         }
 
-        /*
-         * Backend / email connection will be added here.
-         */
+        setIsSubmitting(true);
+        setErrorMsg(null);
 
-        setSubmitted(true);
+        const formData = new FormData(event.currentTarget);
+        const payload = {
+            consultation: selectedPath || formData.get("consultation"),
+            name: formData.get("name"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            date: selectedDate,
+            time: selectedTime,
+            message: formData.get("message"),
+        };
+
+        try {
+            const response = await fetch("/api/consultations", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to process consultation enquiry.");
+            }
+
+            setBookingRef(data.referenceCode || "");
+            setSubmitted(true);
+            setBookedSlots((prev) => [...prev, selectedTime]);
+        } catch (err: any) {
+            setErrorMsg(err.message || "An unexpected error occurred. Please try again.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -594,6 +661,13 @@ export default function Consultation() {
                                 className="mt-8 space-y-5"
                             >
 
+                                {errorMsg && (
+                                    <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+                                        <p className="font-semibold">Unable to submit enquiry</p>
+                                        <p className="mt-1">{errorMsg}</p>
+                                    </div>
+                                )}
+
                                 {/* =====================================================
                     CONSULTATION TYPE
                 ===================================================== */}
@@ -767,38 +841,47 @@ export default function Consultation() {
                                         name="time"
                                         required
                                         value={selectedTime}
-                                        disabled={!selectedDate}
+                                        disabled={!selectedDate || isLoadingSlots}
                                         onChange={(e) => setSelectedTime(e.target.value)}
-                                        className={`w-full rounded-xl border border-[#d4d2c8] px-4 py-3.5 text-sm outline-none transition ${!selectedDate
-                                                ? "cursor-not-allowed bg-[#ebe8df] text-[#999d97]"
-                                                : "bg-white text-[#39443b] focus:border-[#6d806d] focus:ring-2 focus:ring-[#6d806d]/10"
+                                        className={`w-full rounded-xl border border-[#d4d2c8] px-4 py-3.5 text-sm outline-none transition ${!selectedDate || isLoadingSlots
+                                            ? "cursor-not-allowed bg-[#ebe8df] text-[#999d97]"
+                                            : "bg-white text-[#39443b] focus:border-[#6d806d] focus:ring-2 focus:ring-[#6d806d]/10"
                                             }`}
                                     >
 
                                         <option value="">
-                                            {selectedDate
-                                                ? "Select an available session"
-                                                : "Select a date first"}
+                                            {!selectedDate
+                                                ? "Select a date first"
+                                                : isLoadingSlots
+                                                    ? "Checking slot availability..."
+                                                    : "Select an available session"}
                                         </option>
 
-                                        {timeSlots.map((slot) => (
-
-                                            <option
-                                                key={slot}
-                                                value={slot}
-                                            >
-                                                {slot}
-                                            </option>
-
-                                        ))}
+                                        {timeSlots.map((slot) => {
+                                            const isBooked = bookedSlots.includes(slot);
+                                            return (
+                                                <option
+                                                    key={slot}
+                                                    value={slot}
+                                                    disabled={isBooked}
+                                                    className={isBooked ? "text-gray-400 bg-gray-100" : ""}
+                                                >
+                                                    {slot} {isBooked ? "— (Booked)" : ""}
+                                                </option>
+                                            );
+                                        })}
 
                                     </select>
 
 
                                     <p className="mt-2 text-[11px] text-[#8a8f89]">
-                                        {selectedDate
-                                            ? "Available sessions for your selected date."
-                                            : "Choose a preferred date above to view sessions."}
+                                        {!selectedDate
+                                            ? "Choose a preferred date above to view sessions."
+                                            : isLoadingSlots
+                                                ? "Checking available sessions for selected date..."
+                                                : bookedSlots.length > 0
+                                                    ? `${bookedSlots.length} slot(s) already reserved for this date.`
+                                                    : "All sessions available for your selected date."}
                                     </p>
 
                                 </div>
@@ -835,9 +918,13 @@ export default function Consultation() {
 
                                 <button
                                     type="submit"
-                                    className="w-full rounded-full bg-[#29452f] px-8 py-3.5 text-sm font-medium text-white transition duration-300 hover:-translate-y-0.5 hover:bg-[#1f3825] hover:shadow-lg"
+                                    disabled={isSubmitting || !selectedDate || !selectedTime}
+                                    className={`w-full rounded-full px-8 py-3.5 text-sm font-medium text-white transition duration-300 ${isSubmitting || !selectedDate || !selectedTime
+                                        ? "cursor-not-allowed bg-[#788a7c]"
+                                        : "bg-[#29452f] hover:-translate-y-0.5 hover:bg-[#1f3825] hover:shadow-lg"
+                                        }`}
                                 >
-                                    Request Consultation →
+                                    {isSubmitting ? "Submitting Enquiry..." : "Request Consultation →"}
                                 </button>
 
                                 <p className="text-center text-xs leading-5 text-[#858b84]">
@@ -862,16 +949,23 @@ export default function Consultation() {
                             </div>
 
                             <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#997548]">
-                                Thank you
+                                Enquiry Confirmed
                             </p>
 
                             <h2 className="mt-3 font-serif text-4xl text-[#29452f] sm:text-5xl">
                                 Your enquiry has been received.
                             </h2>
 
+                            {bookingRef && (
+                                <div className="mx-auto mt-5 max-w-md rounded-2xl border border-[#d5d0c2] bg-[#f5f2e9] p-4 text-center">
+                                    <p className="text-xs uppercase tracking-widest text-[#765936]">Reference Code</p>
+                                    <p className="mt-1 font-mono text-xl font-bold tracking-wider text-[#29452f]">{bookingRef}</p>
+                                </div>
+                            )}
+
                             <p className="mx-auto mt-5 max-w-xl text-sm leading-7 text-[#687169]">
                                 Thank you for reaching out to Sarvangah. We'll review your
-                                enquiry and get in touch with you soon.
+                                enquiry and get in touch with you soon regarding your selected session on <strong>{selectedDate}</strong> at <strong>{selectedTime}</strong>.
                             </p>
 
                             <button
@@ -879,6 +973,7 @@ export default function Consultation() {
                                 onClick={() => {
                                     setSubmitted(false);
                                     setSelectedTime("");
+                                    setBookingRef("");
                                 }}
                                 className="mt-7 rounded-full border border-[#aeb6a9] px-7 py-3 text-sm font-medium text-[#29452f] transition hover:bg-white"
                             >

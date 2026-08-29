@@ -110,12 +110,21 @@ export default function Hero({
         {/* Content */}
         <div className="hero-content">
           <motion.div
-            className="om-symbol"
-            initial={{ opacity: 0, scale: 0.7 }}
+            className="hero-logo-reveal"
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
           >
-            ॐ
+            <video
+              src="/videos/logoAnimation.mp4"
+              autoPlay
+              muted
+              playsInline
+              loop={false}
+              preload="auto"
+              aria-hidden="true"
+              className="logo-video"
+            />
           </motion.div>
 
           <motion.p
