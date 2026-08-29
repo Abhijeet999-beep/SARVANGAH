@@ -479,19 +479,32 @@ select {
    HERO RESPONSIVE
 ======================================== */
 
+@media (max-width: 1024px) {
+  .hero-background {
+    background-position: 78% center;
+  }
+}
+
 @media (max-width: 900px) {
   .hero {
     min-height: 100svh;
-    padding: 110px 24px 70px;
+    padding: 120px 24px 60px;
+    align-items: flex-end;
+  }
+
+  .hero-background {
+    background-position: 82% 14%;
   }
 
   .hero-overlay {
     background:
       linear-gradient(
         180deg,
-        rgba(244, 239, 228, 0.98) 0%,
-        rgba(244, 239, 228, 0.9) 45%,
-        rgba(244, 239, 228, 0.55) 100%
+        rgba(244, 239, 228, 0.08) 0%,
+        rgba(244, 239, 228, 0.22) 25%,
+        rgba(244, 239, 228, 0.78) 48%,
+        rgba(244, 239, 228, 0.95) 72%,
+        rgba(244, 239, 228, 0.99) 100%
       );
   }
 
@@ -519,8 +532,9 @@ select {
     width: 380px;
     height: 380px;
     right: 50%;
-    top: 70%;
+    top: 25%;
     transform: translate(50%, -50%);
+    opacity: 0.35;
   }
 
   .hero-mandala-two {
@@ -531,7 +545,24 @@ select {
 @media (max-width: 600px) {
   .hero {
     min-height: 100svh;
-    padding: 92px 18px 45px;
+    padding: clamp(140px, 22vh, 190px) 18px 45px;
+    align-items: flex-end;
+  }
+
+  .hero-background {
+    background-position: 83.5% 8%;
+  }
+
+  .hero-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(244, 239, 228, 0.04) 0%,
+        rgba(244, 239, 228, 0.18) 22%,
+        rgba(244, 239, 228, 0.76) 46%,
+        rgba(244, 239, 228, 0.95) 68%,
+        rgba(244, 239, 228, 0.99) 100%
+      );
   }
 
   .om-symbol {
@@ -573,6 +604,28 @@ select {
 
   .hero-bottom {
     display: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero {
+    padding: 130px 14px 36px;
+  }
+
+  .hero-background {
+    background-position: 84% 6%;
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 12vw, 48px);
+  }
+
+  .hero h2 {
+    font-size: 16px;
+  }
+
+  .hero-description {
+    font-size: 13px;
   }
 }
 
