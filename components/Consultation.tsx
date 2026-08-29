@@ -106,7 +106,9 @@ export default function Consultation() {
         setIsLoadingSlots(true);
         setErrorMsg(null);
 
-        fetch(`/api/consultations/booked-slots?date=${encodeURIComponent(selectedDate)}`)
+        const apiBase = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, "") : "";
+
+        fetch(`${apiBase}/api/consultations/booked-slots?date=${encodeURIComponent(selectedDate)}`)
             .then((res) => res.json())
             .then((data) => {
                 if (isMounted) {
@@ -225,7 +227,8 @@ export default function Consultation() {
         };
 
         try {
-            const response = await fetch("/api/consultations", {
+            const apiBase = process.env.NEXT_PUBLIC_API_URL ? process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, "") : "";
+            const response = await fetch(`${apiBase}/api/consultations`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
