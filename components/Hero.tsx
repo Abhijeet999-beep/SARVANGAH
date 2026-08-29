@@ -28,6 +28,9 @@ interface HeroProps {
   primaryButton: HeroButton;
   secondaryButton: HeroButton;
   image: HeroImage;
+  logoVideo?: {
+    src: string;
+  };
 }
 
 type TransitionType = "journey" | "wisdom" | null;
@@ -40,6 +43,7 @@ export default function Hero({
   primaryButton,
   secondaryButton,
   image,
+  logoVideo,
 }: HeroProps) {
   const router = useRouter();
 
@@ -116,7 +120,7 @@ export default function Hero({
             transition={{ duration: 0.9, ease: "easeOut" }}
           >
             <video
-              src="/videos/logoAnimation.mp4"
+              src={logoVideo?.src || "/videos/logoAnimation.mp4"}
               autoPlay
               muted
               playsInline

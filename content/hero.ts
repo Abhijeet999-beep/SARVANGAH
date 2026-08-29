@@ -8,6 +8,10 @@ export const heroContent = {
   description:
     "A journey inward through the timeless wisdom of Sanatana Dharma.",
 
+  logoVideo: {
+    src: "/videos/logoAnimation.mp4",
+  },
+
   primaryButton: {
     label: "Begin Your Journey",
     href: "/philosophy",

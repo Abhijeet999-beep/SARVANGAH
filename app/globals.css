@@ -270,12 +270,13 @@ select {
 
 .hero-logo-reveal {
   position: relative;
-  display: inline-block;
-  margin-bottom: 12px;
-  height: 96px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  height: 160px;
   width: auto;
-  border-radius: 8px;
-  overflow: hidden;
+  pointer-events: none;
 }
 
 .logo-video {
@@ -285,8 +286,18 @@ select {
   object-fit: cover;
   object-position: center;
   mix-blend-mode: multiply;
-  -webkit-mask-image: radial-gradient(ellipse 70% 70% at center, black 40%, transparent 95%);
-  mask-image: radial-gradient(ellipse 70% 70% at center, black 40%, transparent 95%);
+  -webkit-mask-image: radial-gradient(
+    ellipse 50% 60% at 50% 50%,
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 0.85) 45%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  mask-image: radial-gradient(
+    ellipse 50% 60% at 50% 50%,
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 0.85) 45%,
+    rgba(0, 0, 0, 0) 70%
+  );
   pointer-events: none;
 }
 
@@ -525,8 +536,8 @@ select {
   .hero-logo-reveal {
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 10px;
-    height: 84px;
+    margin-bottom: 12px;
+    height: 140px;
   }
 
   .hero h1,
@@ -583,8 +594,8 @@ select {
   }
 
   .hero-logo-reveal {
-    height: 74px;
-    margin-bottom: 8px;
+    height: 120px;
+    margin-bottom: 10px;
   }
 
   .hero h1 {
@@ -634,8 +645,8 @@ select {
   }
 
   .hero-logo-reveal {
-    height: 64px;
-    margin-bottom: 6px;
+    height: 105px;
+    margin-bottom: 8px;
   }
 
   .hero h1 {
